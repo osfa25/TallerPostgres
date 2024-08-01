@@ -1,12 +1,12 @@
 # TallerPostgres
 
--- 1. Crear una base de datos
+-- 1. Crear una base de datos:
 CREATE DATABASE my_database;
 
--- Conéctese a la base de datos recién creada
+-- Conéctese a la base de datos recién creada:
 \c my_database;
 
--- 2. Crear las tablas de país, departamento y municipio
+-- 2. Crear las tablas de:  (país, departamento y municipio)
 CREATE TABLE pais (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
@@ -26,7 +26,8 @@ CREATE TABLE municipio (
     departamento_id INT REFERENCES departamento(id)
 );
 
--- 4. Crear una tabla llamada localidades e ingresar los datos suministrados en el documento de Excel
+-- 4. Crear una tabla llamada localidades e ingresar los datos suministrados en el documento de Excel:
+
 CREATE TABLE localidades (
     codigo_departamento INT,
     nombre_departamento VARCHAR(100),
@@ -34,7 +35,8 @@ CREATE TABLE localidades (
     nombre_municipio VARCHAR(100)
 );
 
--- 5. Poblar los departamentos y municipios usando como fuente de información la tabla de localidades
+-- 5. Poblar los departamentos y municipios usando como fuente de información la tabla de localidades:
+
 INSERT INTO departamento (nombre, pais_id)
 SELECT DISTINCT nombre_departamento, (SELECT id FROM pais WHERE nombre = 'Colombia')
 FROM localidades;
